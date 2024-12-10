@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.office</groupId>
+  <artifactId>flight</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>FlightPjt</name>
+<!-- Spring Boot Parent POM -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.4</version> <!-- 최신 안정 버전 -->
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+	
+	<!-- Java 및 호환성 설정 -->
+    <properties>
+        <java.version>17</java.version> <!-- 프로젝트에서 사용하는 Java 버전 -->
+    </properties>
+    
+	<dependencies>
+	
+    	<!-- Spring Boot Starter JDBC -->
+    	<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-data-jdbc</artifactId>
+	        <version>3.1.4</version>
+	    </dependency>	
+    	
+    	<!-- Spring Boot Starter -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>    	
+        
+        
+    	<!-- MySQL Connector -->
+	    <dependency>
+	        <groupId>mysql</groupId>
+	        <artifactId>mysql-connector-java</artifactId>
+	        <version>8.0.33</version> <!-- 필요 시 최신 버전 확인 -->
+	    </dependency>
+	    
+	    <!-- JSP Support -->
+	    <dependency>
+	        <groupId>org.apache.tomcat.embed</groupId>
+	        <artifactId>tomcat-embed-jasper</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+		    <groupId>org.glassfish.web</groupId>
+		    <artifactId>javax.servlet.jsp.jstl</artifactId>
+		    <version>1.2.5</version>
+		</dependency>
+	
+	    
+	</dependencies>
+	
+	
+	
+    
+
+    
+	<!-- 빌드 설정 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
