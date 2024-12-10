@@ -9,7 +9,7 @@ public class HomeController {
     @GetMapping("/")
     public String home() {
         // "home"은 src/main/webapp/WEB-INF/views/home.jsp를 의미
-        return "home";
+        return "main/home";
     }
 }
 

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,19 +11,7 @@
             margin: 0;
             padding: 0;
         }
-        header {
-            background: #0052cc;
-            color: #fff;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 1rem;
-        }
+
         .banner {
             background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
             height: 50vh;
@@ -34,6 +21,7 @@
             color: #fff;
             text-align: center;
         }
+
         .search-form {
             background: #fff;
             padding: 1rem;
@@ -43,10 +31,12 @@
             display: flex;
             gap: 1rem;
         }
+
         .search-form input, .search-form select, .search-form button {
             flex: 1;
             padding: 0.5rem;
         }
+
         footer {
             background: #f1f1f1;
             color: #555;
@@ -56,25 +46,17 @@
     </style>
 </head>
 <body>
-    <header>
-        <div>Trip Clone</div>
-        <nav>
-            <a href="#">Flights</a>
-            <a href="#">Hotels</a>
-            <a href="#">Car Rentals</a>
-            <a href="#">Deals</a>
-            <a href="#">Login</a>
-        </nav>
-    </header>
+    <%@ include file="/WEB-INF/views/includes/header.jsp" %>
+    
     <div class="banner">
         <h1>Find Your Next Destination</h1>
     </div>
     <div class="search-form">
-        <input type="text" placeholder="Departure City">
-        <input type="text" placeholder="Destination City">
+        <input type="text" placeholder="출발지">
+        <input type="text" placeholder="도착지">
         <input type="date">
         <input type="date">
-        <button>Search Flights</button>
+        <button>검색</button>
     </div>
     <footer>
         <p>&copy; 2024 Trip Clone. All rights reserved.</p>
