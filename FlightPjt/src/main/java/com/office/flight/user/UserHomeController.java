@@ -1,18 +1,20 @@
-package com.office.flight;
+package com.office.flight.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
-
-    @GetMapping("/")
+@RequestMapping("/user")
+public class UserHomeController {
+	
+	@GetMapping("/")
     public String home() {
     	System.out.println(
-    			"[HomeController] home()");	
+    			"[UserHomeController] home()");
+    	
+    	String nextPage = "user/home";
         
-        return "user/home";
+        return nextPage;
     }
 }
-

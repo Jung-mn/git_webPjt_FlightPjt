@@ -118,7 +118,7 @@
                 <a href="#" onclick="selectLanguage('Français')">Français</a>
             </div>
         </div>
-        <a href="#">회원가입</a>
+        <a href="/memberJoin">회원가입</a>
     </nav>
 
     <!-- Menu (Under the Logo) -->
@@ -132,7 +132,7 @@
         </div>
 
         <!-- 로그인 (오른쪽 배치) -->
-        <a href="#" class="login">
+        <a href="/memberLogin" class="login">
             <img src="https://img.icons8.com/ios-filled/50/FFFFFF/login-rounded-right.png" alt="login-Icon">로그인
         </a>
     </div>
