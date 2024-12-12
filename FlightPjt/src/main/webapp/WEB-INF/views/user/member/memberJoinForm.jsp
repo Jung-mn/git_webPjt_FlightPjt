@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html>
+<html >
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
@@ -65,6 +66,9 @@
         .form-group input[type="radio"] {
             width: auto;
         }
+        .form-group input[type="email"]::placeholder {
+		    color: #888888; /* 회색으로 텍스트 색상 설정 */
+		}
         .form-actions {
             text-align: center;
             margin-top: 20px;
@@ -100,7 +104,8 @@
 	    <div class="container">
 	        <h2>회원정보 입력</h2> 
 	        <br><br>
-	        <form action="joinProcess.jsp" method="post">
+	       <form action="/user/member/join" method="post">
+				
 	            <!-- 한글 이름 -->
 	            <div class="form-group">
 	                <label for="koreanName">&nbsp한글 이름</label>
@@ -121,6 +126,7 @@
 	            <!-- 아이디 -->
 	            <div class="form-group">
 	                <label for="id">&nbsp아이디</label>
+	                <a>&nbsp6~12자리 영문, 숫자로 입력.</a>
 	                <input type="text" id="id" name="id" required>
 	            </div>
 	            <!-- 비밀번호 -->
@@ -129,10 +135,10 @@
 	                <input type="password" id="password" name="password" required>
 	            </div>
 	            <!-- 비밀번호 확인 -->
-	            <div class="form-group">
-	                <label for="passwordConfirm">&nbsp비밀번호 확인</label>
-	                <input type="password" id="passwordConfirm" name="passwordConfirm" required>
-	            </div>
+				<div class="form-group">
+				    <label for="passwordConfirm">&nbsp비밀번호 확인</label>
+				    <input type="password" id="passwordConfirm" name="passwordConfirm" required>
+				</div>            
 	            <!-- 생년월일 -->
 	            <div class="form-group">
 	                <label for="birthdate">&nbsp생년월일</label>
@@ -141,15 +147,15 @@
 	            <!-- 성별 -->
 	            <div class="form-group">
 	                <label>&nbsp성별</label>
-	                
-	                남<input type="radio" id="male" name="gender" value="male" required>&nbsp&nbsp&nbsp 
+	                <br>
+	                &nbsp남<input type="radio" id="male" name="gender" value="male" required>&nbsp&nbsp&nbsp 
 	                여<input type="radio" id="female" name="gender" value="female" required>
 	                
 	            </div>
 	            <!-- 이메일 -->
 	            <div class="form-group">
 	                <label for="email">&nbsp이메일 주소</label>
-	                <input type="email" id="email" name="email" required>
+	                <input type="email" id="email" name="email" required placeholder="예) hong1234@gmail.com">
 	            </div>
 	            <!-- 전화번호 -->
 	            <div class="form-group">
