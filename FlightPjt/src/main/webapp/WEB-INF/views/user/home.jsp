@@ -117,7 +117,6 @@
             cursor: pointer;
             font-size: 20px;
         }
-
     </style>
     <script>
         function adjustCount(type, operation) {

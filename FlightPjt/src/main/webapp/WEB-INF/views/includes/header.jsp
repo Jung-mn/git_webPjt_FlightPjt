@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <style>
     header {
         background: #0029a6;
@@ -98,6 +99,106 @@
         height: 25px;
         margin-left: 8px;
     }
+    
+
+    
+	/* 모달 기본 스타일 */
+	.modal {
+	    display: block; /* 초기에는 숨김 */
+	    position: fixed;
+	    z-index: 1000; /* 다른 요소보다 위에 표시 */
+	    left: 0;
+	    top: 0;
+	    width: 100%;
+	    height: 100%;
+	    overflow: auto;
+	    background-color: rgba(0, 0, 0, 0.4); /* 반투명 배경 */
+	}
+	
+	/* 모달 콘텐츠 스타일 */
+	.modal-content {
+	    background-color: #fff;
+	    margin: 5% auto;
+	    padding: 20px;
+	    border: 1px solid #888;
+	    width: 30%;
+	    height: 400px; /* 원하는 크기로 높이 키움 */
+	    text-align: center;
+	    border-radius: 10px;
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	    color: black; /* 텍스트 색상 설정 */    
+    	flex-direction: column; /* 세로 정렬 */
+    	position: relative; /* 닫기 버튼을 절대 위치로 배치할 수 있게 설정 */
+
+	}
+	.modal-content a {
+	    color: black; /* 링크 텍스트 색상 */
+	    text-decoration: none; /* 밑줄 제거 (선택 사항) */
+	}
+	
+	/* 닫기 버튼 */
+	.close-button {
+	    color: #aaa;
+	    font-size: 28px;
+	    font-weight: bold;
+	    cursor: pointer;
+	    position: absolute;
+	    top: 10px;
+	    right: 10px;
+	    
+	}
+	h2 {
+        font-size: 20px;
+        margin: 1px 0; /* 위아래 여백을 10px로 설정 */
+    }
+
+    p {
+        font-size: 14px;
+        color: #666;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 80%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 10px 0;
+    }
+
+    button {
+        width: 80%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;         
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #007bff;
+        font-size: 14px;
+	}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    hr {
+        margin: 20px auto;
+        width: 80%;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
 </style>
 
 <header>
@@ -132,9 +233,25 @@
         </div>
 
         <!-- 로그인 (오른쪽 배치) -->
-        <a href="user/member/memberLoginForm" class="login">
+        <a href="#" id="login-button" class="login"> 
             <img src="https://img.icons8.com/ios-filled/50/FFFFFF/login-rounded-right.png" alt="login-Icon">로그인
-        </a>
+        </a> 
+        
+        <!-- 로그인 모달 -->
+        <div id="login-modal" class="modal">
+	        <div class="modal-content">
+	            <span class="close-button">&times;</span>
+	            <h2>로그인</h2>
+	            <a>간편하게 예약을 관리하고 회원 전용 혜택도 누려보세요</a>
+	            <form action="/user/member/login" method="POST">
+	                <input type="text" id="id" name="id" placeholder="아이디를 입력하세요" required>
+	                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+	                <button type="submit">로그인</button>
+	                <hr>
+	                <a href="/user/member/memberJoinForm">회원가입</a>
+	            </form>
+	        </div>
+    	</div>
     </div>
 </header>
 
@@ -158,4 +275,28 @@
             languageDropdown.style.display = 'none';
         }
     });
+    
+    const loginButton = document.getElementById('login-button');
+    const modal = document.getElementById('login-modal');
+    const closeButton = document.querySelector('.close-button');
+
+    loginButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.style.display = 'block';
+    });
+
+    closeButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // 초기 상태 명확히 설정
+    document.addEventListener('DOMContentLoaded', () => {
+        modal.style.display = 'none';
+    }); 
 </script>

@@ -1,14 +1,10 @@
 package com.office.flight.user.member;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 @Service
 public class UserMemberService {
-
     @Autowired
     private UserMemberDao userMemberDao;
-
 //    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     
     
@@ -23,4 +19,6 @@ public class UserMemberService {
         int result = userMemberDao.join(member);
         return result > 0; // 성공 시 true 반환
     }
+    
+
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/user/member")
 public class UserMemberController {
-	
+
 	@Autowired
     private UserMemberService userMemberService;
 	
@@ -22,18 +22,10 @@ public class UserMemberController {
     	System.out.println("[UserMemberController] showMemberJoinPage");
         return "user/member/memberJoinForm"; // memberJoinForm.jsp를 반환
     }
-    
-    // 회원가입 페이지로 이동
-    @GetMapping("/memberLoginForm")
-    public String showMemberLoginPage() {
-    	System.out.println("[UserMemberController] showMemberLoginPage");
-        return "user/member/memberLoginForm"; // memberJoinForm.jsp를 반환
-    }
-    
+
     // 회원가입 처리
     @PostMapping("/join")
     public String joinMember(@ModelAttribute UserMemberVo member, Model model) {
-
     	System.out.println("[UserMemberController] joinMember");
     	
     	// 비밀번호 확인
@@ -47,7 +39,7 @@ public class UserMemberController {
         
         if (success) {
             model.addAttribute("message", "회원가입 성공!");
-            return "redirect:/user/member/memberLoginForm"; // 성공 시 로그인 페이지로 리디렉션
+            return "user/home"; // 성공 시 로그인 페이지로 리디렉션
         } else {
             model.addAttribute("message", "회원가입 실패. 다시 시도해 주세요.");
             return "user/member/memberJoinForm"; // 실패 시 가입 페이지로 돌아감
@@ -55,14 +47,5 @@ public class UserMemberController {
     }
     
     
-//    @PostMapping("/join")
-//    public String processJoinForm(UserMemberVo member) {
-//        // 회원가입 처리 로직을 여기에 추가
-//    	System.out.println("success"); 
-//        System.out.println(member); // 예시로 콘솔에 출력
-//        
-//        // 성공적으로 처리 후 '가입 완료' 페이지로 리다이렉트
-//        return "redirect:/user/member/memberLoginForm";
-//    }
 
 }
