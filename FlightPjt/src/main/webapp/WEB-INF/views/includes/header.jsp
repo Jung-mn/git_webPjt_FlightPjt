@@ -217,9 +217,23 @@
                 <a href="#" onclick="selectLanguage('日本語')">日本語</a>
                 <a href="#" onclick="selectLanguage('中文')">中文</a>
                 <a href="#" onclick="selectLanguage('Français')">Français</a>
-            </div>
+            </div>      
         </div>
-        <a href="/user/member/memberJoinForm">회원가입</a>
+        
+        
+        <!-- 회원가입 / 로그아웃 -->
+        <% 
+            // 세션에서 로그인한 사용자의 정보를 가져옴
+            Object loggedInUser = session.getAttribute("loggedInUser");
+        %>
+        <c:choose>
+            <c:when test="${not empty loggedInUser}">
+                <a href="/user/member/logout">로그아웃</a>
+            </c:when>
+            <c:otherwise>
+                <a href="/user/member/memberJoinForm">회원가입</a>
+            </c:otherwise>
+        </c:choose>
     </nav>
 
     <!-- Menu (Under the Logo) -->

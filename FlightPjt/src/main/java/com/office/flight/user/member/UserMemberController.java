@@ -1,5 +1,7 @@
 package com.office.flight.user.member;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,7 @@ public class UserMemberController {
     // 회원가입 처리
     @PostMapping("/join")
     public String joinMember(@ModelAttribute UserMemberVo member, Model model) {
+    	
     	System.out.println("[UserMemberController] joinMember");
     	
     	// 비밀번호 확인
@@ -46,6 +49,24 @@ public class UserMemberController {
         }
     }
     
-    
+    @PostMapping("/login")
+    public String loginMember(@RequestParam("id") String id,
+                              @RequestParam("password") String password,
+                              Model model) {    	
+    	
+    	System.out.println("[UserMemberController] loginMember");
+    	
+        // 로그인 서비스 호출
+        Optional<UserMemberVo> member = userMemberService.loginMember(id, password);
+
+        // 로그인 성공 여부에 따른 처리
+        if (member.isPresent()) {
+            model.addAttribute("member", member.get()); // 로그인한 회원 정보를 모델에 저장
+            return "user/home";  // 로그인 성공 후 홈 페이지로 리디렉션
+        } else {
+            model.addAttribute("errorMessage", "아이디 또는 비밀번호가 잘못되었습니다.");
+            return "user/member/memberJoinForm"; // 로그인 실패 시 로그인 페이지로 돌아감
+        }
+    }   
 
 }

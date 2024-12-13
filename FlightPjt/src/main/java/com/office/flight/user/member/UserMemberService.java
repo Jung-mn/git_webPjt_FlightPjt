@@ -1,4 +1,6 @@
 package com.office.flight.user.member;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
@@ -20,5 +22,11 @@ public class UserMemberService {
         return result > 0; // 성공 시 true 반환
     }
     
-
+    // 로그인 처리 메서드
+    public Optional<UserMemberVo> loginMember(String id, String password) {
+    	
+    	System.out.println("[UserMemberService] loginMember");
+        // Dao에서 사용자 조회
+        return userMemberDao.findByIdAndPassword(id, password);
+    }
 }
