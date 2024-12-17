@@ -104,7 +104,7 @@
 	    <div class="container">
 	        <h2>회원정보 입력</h2> 
 	        <br><br>
-	       <form action="/user/member/join" method="post">
+	       <form action="<c:url value='/user/member/join' />" method="post">
 				
 	            <!-- 한글 이름 -->
 	            <div class="form-group">

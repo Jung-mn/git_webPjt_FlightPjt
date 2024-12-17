@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     header {
         background: #0029a6;
@@ -104,7 +104,7 @@
     
 	/* 모달 기본 스타일 */
 	.modal {
-	    display: block; /* 초기에는 숨김 */
+	    display: none; /* 초기에는 숨김 */
 	    position: fixed;
 	    z-index: 1000; /* 다른 요소보다 위에 표시 */
 	    left: 0;
@@ -202,6 +202,7 @@
 </style>
 
 <header>
+
     <!-- Logo -->
     <div class="logo">Flight<span>together</span></div>
 
@@ -225,13 +226,14 @@
         <% 
             // 세션에서 로그인한 사용자의 정보를 가져옴
             Object loggedInUser = session.getAttribute("loggedInUser");
+        	System.out.println(loggedInUser);
         %>
         <c:choose>
             <c:when test="${not empty loggedInUser}">
-                <a href="/user/member/logout">로그아웃</a>
+                <a href="<c:url value='/user/member/logout' />" >로그아웃</a>
             </c:when>
             <c:otherwise>
-                <a href="/user/member/memberJoinForm">회원가입</a>
+                <a href="<c:url value='/user/member/memberJoinForm' />" >회원가입</a>
             </c:otherwise>
         </c:choose>
     </nav>
@@ -245,11 +247,22 @@
             <a href="#"><img src="https://img.icons8.com/ios-filled/50/FFFFFF/train.png" alt="train-icon"/> 기차표</a>
             <a href="#"><img src="https://img.icons8.com/ios-filled/50/FFFFFF/station-wagon.png" alt="car-icon"/> 렌터카</a>
         </div>
-
-        <!-- 로그인 (오른쪽 배치) -->
-        <a href="#" id="login-button" class="login"> 
-            <img src="https://img.icons8.com/ios-filled/50/FFFFFF/login-rounded-right.png" alt="login-Icon">로그인
-        </a> 
+	
+	
+	
+	
+		<c:choose>
+			<c:when test="${not empty loggedInUser}">
+        		<!-- 로그인 (오른쪽 배치) -->
+        		<a href="<c:url value='/user/member/mypage' />" >마이페이지</a> 
+        	</c:when>
+            <c:otherwise>
+            	<!-- 로그인 (오른쪽 배치) -->
+        		<a href="#" id="login-button" class="login"> 
+            		<img src="https://img.icons8.com/ios-filled/50/FFFFFF/login-rounded-right.png" alt="login-Icon">로그인
+       	 		</a> 
+        	</c:otherwise>
+        </c:choose>
         
         <!-- 로그인 모달 -->
         <div id="login-modal" class="modal">
@@ -257,12 +270,12 @@
 	            <span class="close-button">&times;</span>
 	            <h2>로그인</h2>
 	            <a>간편하게 예약을 관리하고 회원 전용 혜택도 누려보세요</a>
-	            <form action="/user/member/login" method="POST">
+	            <form action="<c:url value='/user/member/login' />" method="POST" onsubmit="closeModal()">
 	                <input type="text" id="id" name="id" placeholder="아이디를 입력하세요" required>
 	                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
 	                <button type="submit">로그인</button>
 	                <hr>
-	                <a href="/user/member/memberJoinForm">회원가입</a>
+	                <a href="<c:url value='/user/member/memberJoinForm' />" >회원가입</a>
 	            </form>
 	        </div>
     	</div>
@@ -308,9 +321,17 @@
             modal.style.display = 'none';
         }
     });
-
-    // 초기 상태 명확히 설정
+    function closeModal() {
+    	modal.style.display = 'none'; // 로그인 후 모달 닫기
+        // 로그인 후 페이지 새로 고침 또는 리다이렉트
+        window.location.href = '/home'; // 예: 홈 페이지로 리다이렉트
+        // 또는 페이지를 새로 고침
+        // window.location.reload(); // 페이지를 새로 고침
+    }
+    
+ 	// 초기 상태 명확히 설정
     document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = 'none';
     }); 
+
 </script>

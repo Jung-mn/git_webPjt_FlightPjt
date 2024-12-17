@@ -2,6 +2,8 @@ package com.office.flight.user.member;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ public class UserMemberController {
 	@Autowired
     private UserMemberService userMemberService;
 	
+	
 	// 회원가입 페이지로 이동
     @GetMapping("/memberJoinForm")
     public String showMemberJoinPage(Model model) {
@@ -25,6 +28,7 @@ public class UserMemberController {
         return "user/member/memberJoinForm"; // memberJoinForm.jsp를 반환
     }
 
+    
     // 회원가입 처리
     @PostMapping("/join")
     public String joinMember(@ModelAttribute UserMemberVo member, Model model) {
@@ -49,24 +53,59 @@ public class UserMemberController {
         }
     }
     
+    
+    // 로그인 기능
     @PostMapping("/login")
     public String loginMember(@RequestParam("id") String id,
                               @RequestParam("password") String password,
-                              Model model) {    	
-    	
-    	System.out.println("[UserMemberController] loginMember");
-    	
+                              Model model, HttpSession session) { 
+
+        System.out.println("[UserMemberController] loginMember");
+
         // 로그인 서비스 호출
         Optional<UserMemberVo> member = userMemberService.loginMember(id, password);
 
         // 로그인 성공 여부에 따른 처리
         if (member.isPresent()) {
+            // 로그인 성공 시, 세션에 사용자 정보 저장
+            session.setAttribute("loggedInUser", member.get());
+            
             model.addAttribute("member", member.get()); // 로그인한 회원 정보를 모델에 저장
-            return "user/home";  // 로그인 성공 후 홈 페이지로 리디렉션
+            return "redirect:/user/";  // 로그인 성공 후 홈 페이지로 리디렉션
         } else {
             model.addAttribute("errorMessage", "아이디 또는 비밀번호가 잘못되었습니다.");
+            model.addAttribute("id", id); // 로그인 실패 시, 사용자가 입력한 id 값을 다시 전달
             return "user/member/memberJoinForm"; // 로그인 실패 시 로그인 페이지로 돌아감
         }
-    }   
+    }
+    
+	 // 로그아웃 처리
+	 @GetMapping("/logout")
+	 public String logoutMember(HttpSession session) {
+	     System.out.println("[UserMemberController] logoutMember");
+	        
+	     // 세션에서 사용자 정보를 제거
+	     session.invalidate();  // 세션 무효화
+	        
+	     return "user/home";  // 로그아웃 후 홈 페이지로 리디렉션
+	 }
+	
+	 // 마이페이지 페이지로 이동
+	 @GetMapping("/mypage")
+	 public String showMyPage(HttpSession session, Model model) {
+	     System.out.println("[UserMemberController] showMyPage");
+	        
+	     // 세션에서 로그인한 사용자 정보 가져오기
+	     UserMemberVo loggedInUser = (UserMemberVo) session.getAttribute("loggedInUser");
+	
+	     if (loggedInUser == null) {
+	         return "user/member/memberJoinForm";  // 로그인 안 한 경우 로그인 페이지로 리디렉션
+	     }
+	
+	     model.addAttribute("loggedInUser", loggedInUser);  // 마이페이지에 사용자 정보 전달
+	     return "user/member/mypage";  // 마이페이지로 이동
+  }
+    
+    
 
 }
