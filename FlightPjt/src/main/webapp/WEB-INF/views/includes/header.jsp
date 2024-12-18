@@ -25,6 +25,7 @@
         display: flex; /* Flexbox로 변경 */
         gap: 1.5rem; /* 항목 간 간격을 설정 */
         position: relative;
+        padding-top: 10px;
     }
 
     nav a {
@@ -32,7 +33,7 @@
         text-decoration: none;
         font-size: 0.9rem;
     }
-
+    
     /* Language Dropdown */
     .language-dropdown {
         position: absolute;
@@ -78,6 +79,10 @@
         text-decoration: none;
         font-size: 0.9rem;
     }
+    .menu a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px; /* 두께를 1.5px로 설정 */
+}
     /* 아이콘의 크기 조정 */
     .menu a img {
         width: 25px;
@@ -101,42 +106,42 @@
     }
     
 
-    
-	/* 모달 기본 스타일 */
+     
+	/* login-modal
 	.modal {
-	    display: none; /* 초기에는 숨김 */
+	    display: none; 
 	    position: fixed;
-	    z-index: 1000; /* 다른 요소보다 위에 표시 */
+	    z-index: 1000; 
 	    left: 0;
 	    top: 0;
 	    width: 100%;
 	    height: 100%;
 	    overflow: auto;
-	    background-color: rgba(0, 0, 0, 0.4); /* 반투명 배경 */
+	    background-color: rgba(0, 0, 0, 0.4); 
 	}
 	
-	/* 모달 콘텐츠 스타일 */
+	
 	.modal-content {
 	    background-color: #fff;
 	    margin: 5% auto;
 	    padding: 20px;
 	    border: 1px solid #888;
 	    width: 30%;
-	    height: 400px; /* 원하는 크기로 높이 키움 */
+	    height: 400px; 
 	    text-align: center;
 	    border-radius: 10px;
 	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	    color: black; /* 텍스트 색상 설정 */    
-    	flex-direction: column; /* 세로 정렬 */
-    	position: relative; /* 닫기 버튼을 절대 위치로 배치할 수 있게 설정 */
+	    color: black; 
+    	flex-direction: column; 
+    	position: relative; 
 
 	}
 	.modal-content a {
-	    color: black; /* 링크 텍스트 색상 */
-	    text-decoration: none; /* 밑줄 제거 (선택 사항) */
+	    color: black;
+	    text-decoration: none; 
 	}
 	
-	/* 닫기 버튼 */
+	
 	.close-button {
 	    color: #aaa;
 	    font-size: 28px;
@@ -149,7 +154,7 @@
 	}
 	h2 {
         font-size: 20px;
-        margin: 1px 0; /* 위아래 여백을 10px로 설정 */
+        margin: 1px 0;
     }
 
     p {
@@ -198,13 +203,15 @@
         width: 80%;
         border: 0;
         border-top: 1px solid #ccc;
-    }
+    }   */
+    
+    
 </style>
 
 <header>
 
     <!-- Logo -->
-    <div class="logo">Flight<span>together</span></div>
+    <a href="<c:url value='/user/' />" class="logo" style="text-decoration: none; color: inherit;">Flight<span>together</span></a>
 
     <!-- Navigation Links (Top Right) -->
     <nav>
@@ -230,6 +237,7 @@
         %>
         <c:choose>
             <c:when test="${not empty loggedInUser}">
+            	<a style="font-size: 17px;">${loggedInUser.koreanName}님</a>
                 <a href="<c:url value='/user/member/logout' />" >로그아웃</a>
             </c:when>
             <c:otherwise>
@@ -253,18 +261,18 @@
 	
 		<c:choose>
 			<c:when test="${not empty loggedInUser}">
-        		<!-- 로그인 (오른쪽 배치) -->
+        		<!-- 마이페이지 (오른쪽 배치) -->
         		<a href="<c:url value='/user/member/mypage' />" >마이페이지</a> 
         	</c:when>
             <c:otherwise>
             	<!-- 로그인 (오른쪽 배치) -->
-        		<a href="#" id="login-button" class="login"> 
+        		<a href="<c:url value='/user/member/memberLoginForm' />" > 
             		<img src="https://img.icons8.com/ios-filled/50/FFFFFF/login-rounded-right.png" alt="login-Icon">로그인
        	 		</a> 
         	</c:otherwise>
         </c:choose>
         
-        <!-- 로그인 모달 -->
+        <!-- 로그인 모달 
         <div id="login-modal" class="modal">
 	        <div class="modal-content">
 	            <span class="close-button">&times;</span>
@@ -278,7 +286,8 @@
 	                <a href="<c:url value='/user/member/memberJoinForm' />" >회원가입</a>
 	            </form>
 	        </div>
-    	</div>
+    	</div> -->
+    	
     </div>
 </header>
 
@@ -302,6 +311,9 @@
             languageDropdown.style.display = 'none';
         }
     });
+    
+    
+    /*   login-modal
     
     const loginButton = document.getElementById('login-button');
     const modal = document.getElementById('login-modal');
@@ -333,5 +345,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = 'none';
     }); 
+ 	
+ 	*/
 
 </script>

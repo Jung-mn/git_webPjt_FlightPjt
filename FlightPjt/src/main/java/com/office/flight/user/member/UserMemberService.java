@@ -10,6 +10,7 @@ public class UserMemberService {
 //    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     
     
+    // 회원가입 처리 메서드
     public boolean registerMember(UserMemberVo member) {
     	
     	System.out.println("[UserMemberService] registerMember");
@@ -22,6 +23,7 @@ public class UserMemberService {
         return result > 0; // 성공 시 true 반환
     }
     
+    
     // 로그인 처리 메서드
     public Optional<UserMemberVo> loginMember(String id, String password) {
     	
@@ -29,4 +31,39 @@ public class UserMemberService {
         // Dao에서 사용자 조회
         return userMemberDao.findByIdAndPassword(id, password);
     }
+ 
+    
+    // 로그인 찾기 메서드
+    public Optional<String> findIdByNameAndPhone(String name, String phone) {
+        System.out.println("[UserMemberService] findIdByNameAndPhone");
+        
+        // DAO에서 아이디 찾기
+        return userMemberDao.findIdByNameAndPhone(name, phone);
+    }
+
+   
+    // 로그인 찾기 메서드
+    public Optional<String> findPasswordByIdAndPhone(String id, String phone) {
+        System.out.println("[UserMemberService] findPasswordByIdAndPhone");
+        
+        // DAO에서 아이디 찾기
+        return userMemberDao.findPasswordByIdAndPhone(id, phone);
+    }
+
+    
+    // 회원 정보 수정 처리 메서드
+    public boolean updateMember(UserMemberVo updatedMember) {
+        System.out.println("[UserMemberService] updateMember");
+        // 비밀번호 암호화가 필요하다면 여기에 추가할 수 있음
+        // String encryptedPassword = passwordEncoder.encode(updatedMember.getPassword());
+        // updatedMember.setPassword(encryptedPassword);
+        
+        int result = userMemberDao.updateMember(updatedMember);
+        return result > 0;  // 성공적으로 업데이트된 경우 true 반환
+    }
+
+
+    
+    
+
 }
