@@ -162,72 +162,61 @@
 	    <img src="<c:url value='/resources//img/test3.jpg' />" alt="Banner" style="width: 100%; height: 100%; object-fit: cover;" />
 	    <h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff;">함께하는 여행, 빠르고 쉽게!</h1>
 	</div>
-    <div class="search-form">
-        <!-- 왕복/편도 선택 라디오 버튼 -->
-        <div>
-            <label><input type="radio" name="tripType" value="roundTrip" checked> 왕복</label>
-            <label><input type="radio" name="tripType" value="oneWay"> 편도</label>
-        </div>
-        
-        
-        <div class="search-row">
-            
-            <!-- 출발지&도착지 -->
-            <input type="text" placeholder="출발지">
-            <input type="text" placeholder="도착지">
-            
-            <!-- 출발일&도착일 -->
-            <input type="date" placeholder="출발일">
-            <input type="date" placeholder="도착일">
-            
-            <!-- 탑승자 결과 보기 및 설정 -->
-            <div class="passenger-container">
-                <div id="passenger-overview" class="passenger-overview" onclick="togglePassengerSection()">
-                    성인 1명, 일반석
-                </div>
-                <div id="passenger-section" class="passenger-section">
-                    <div>
-                        <label for="adult-count">성인 (12세 이상)</label>
-                        <div>
-                            <button type="button" onclick="adjustCount('adult', 'decrement')">-</button>
-                            <input id="adult-count" type="text" value="1" readonly style="width: 40px; text-align: center;">
-                            <button type="button" onclick="adjustCount('adult', 'increment')">+</button>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="child-count">어린이 (2~11세)</label>
-                        <div>
-                            <button type="button" onclick="adjustCount('child', 'decrement')">-</button>
-                            <input id="child-count" type="text" value="0" readonly style="width: 40px; text-align: center;">
-                            <button type="button" onclick="adjustCount('child', 'increment')">+</button>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="infant-count">유아 (2세 미만)</label>
-                        <div>
-                            <button type="button" onclick="adjustCount('infant', 'decrement')">-</button>
-                            <input id="infant-count" type="text" value="0" readonly style="width: 40px; text-align: center;">
-                            <button type="button" onclick="adjustCount('infant', 'increment')">+</button>
-                        </div>
-                    </div>
-                    <!-- 좌석 종류 -->
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" name="seatType" value="economy" checked> 일반석</label>
-                        <label><input type="checkbox" name="seatType" value="premiumEconomy"> 프리미엄 일반석</label>
-                        <label><input type="checkbox" name="seatType" value="business"> 비즈니스석</label>
-                        <label><input type="checkbox" name="seatType" value="first"> 일등석</label>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- 검색 버튼 -->
-        <div class="search-row">
-            <div style="flex: 1;"></div> <!-- 왼쪽 정렬용 빈 공간 -->
-            <button class="search-button">검색</button>
-        </div>
-        
-    </div>
+    <div class="search-form">
+	    <form action="<c:url value='/searchFlights' />" method="post">
+	        <!-- 왕복/편도 선택 라디오 버튼 -->
+	        <div>
+	            <label><input type="radio" name="tripType" value="roundTrip" checked> 왕복</label>
+	            <label><input type="radio" name="tripType" value="oneWay"> 편도</label>
+	        </div>
+	
+	        <div class="search-row">
+	            <!-- 출발지 (IATA 코드 입력 필드로 변경) -->
+	            <input type="text" name="origin" placeholder="출발지 (IATA 코드)" required>
+	            <!-- 도착지 (IATA 코드 입력 필드로 변경) -->
+	            <input type="text" name="destination" placeholder="도착지 (IATA 코드)" required>
+	            
+	            <!-- 출발일 -->
+	            <input type="date" name="departureDate" placeholder="출발일" required>
+	            <!-- 도착일 (왕복인 경우만 필요) -->
+	            <input type="date" name="returnDate" placeholder="도착일">
+	        </div>
+	
+	        <!-- 탑승자 설정 -->
+	        <div class="passenger-container">
+	            <div id="passenger-overview" class="passenger-overview" onclick="togglePassengerSection()">
+	                성인 1명, 일반석
+	            </div>
+	            <div id="passenger-section" class="passenger-section">
+	                <div>
+	                    <label for="adult-count">성인 (12세 이상)</label>
+	                    <div>
+	                        <button type="button" onclick="adjustCount('adult', 'decrement')">-</button>
+	                        <input id="adult-count" type="text" name="adults" value="1" readonly style="width: 40px; text-align: center;">
+	                        <button type="button" onclick="adjustCount('adult', 'increment')">+</button>
+	                    </div>
+	                </div>
+	                <div>
+	                    <label for="child-count">어린이 (2~11세)</label>
+	                    <div>
+	                        <button type="button" onclick="adjustCount('child', 'decrement')">-</button>
+	                        <input id="child-count" type="text" name="children" value="0" readonly style="width: 40px; text-align: center;">
+	                        <button type="button" onclick="adjustCount('child', 'increment')">+</button>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	
+	        <!-- 검색 버튼 -->
+	        <div class="search-row">
+	            <div style="flex: 1;"></div> <!-- 왼쪽 정렬용 빈 공간 -->
+	            <button type="submit" class="search-button">검색</button>
+	        </div>
+	    </form>
+	</div>
+
+
 
     <%@ include file="/WEB-INF/views/includes/footer.jsp" %> <!-- 푸터를 외부 파일로 포함 -->
 </body>
