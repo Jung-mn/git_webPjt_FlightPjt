@@ -113,7 +113,8 @@
                                     <fmt:parseDate var="departureDate" value="${flight['itineraries'][0]['segments'][0]['departure']['at']}" pattern="yyyy-MM-dd'T'HH:mm:ss" />
                                     <fmt:formatDate value="${departureDate}" pattern="MM월 dd일 HH시 mm분" />
                                 </td>
-                                <td>${flight['itineraries'][0]['duration']}</td>
+                                <!-- <td>${flight['itineraries'][0]['duration']}</td> -->
+                                <td>${flight['readableDuration']}</td> <!-- 변환된 비행시간 -->
                                 <td>${flight['itineraries'][0]['segments'][0]['arrival']['iataCode']}</td>
                                 <td>
                                     <fmt:parseDate var="arrivalDate" value="${flight['itineraries'][0]['segments'][0]['arrival']['at']}" pattern="yyyy-MM-dd'T'HH:mm:ss" />
@@ -156,7 +157,8 @@
                                     <fmt:parseDate var="departureDate" value="${flight['itineraries'][0]['segments'][0]['departure']['at']}" pattern="yyyy-MM-dd'T'HH:mm:ss" />
                                     <fmt:formatDate value="${departureDate}" pattern="MM월 dd일 HH시 mm분" />
                                 </td>
-                                <td>${flight['itineraries'][0]['duration']}</td>
+                                <!-- <td>${flight['itineraries'][0]['duration']}</td> -->
+                                <td>${flight['readableDuration']}</td> <!-- 변환된 비행시간 -->
                                 <td>${flight['itineraries'][0]['segments'][0]['arrival']['iataCode']}</td>
                                 <td>
                                     <fmt:parseDate var="arrivalDate" value="${flight['itineraries'][0]['segments'][0]['arrival']['at']}" pattern="yyyy-MM-dd'T'HH:mm:ss" />
